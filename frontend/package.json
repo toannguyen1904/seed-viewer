@@ -1,0 +1,29 @@
+{
+  "name": "viewer-u-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite public",
+    "build": "vite build public && cp -r public/images public/dist/"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "@playwright/test": "^1.58.1",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.3.0",
+    "eslint-plugin-jsdoc": "^48.2.6",
+    "globals": "^15.3.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5",
+    "vite": "^5.0.8",
+    "vite-plugin-conditional-compiler": "^0.3.1"
+  },
+  "dependencies": {
+    "@types/three": "^0.165.0",
+    "stats.js": "^0.17.0",
+    "three": "^0.166.1",
+    "tippy.js": "^6.3.7"
+  }
+}

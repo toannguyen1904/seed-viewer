@@ -1,0 +1,23 @@
+services:
+  default:
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "${PORT}:8080"
+
+    volumes:
+      - type: bind
+        source: ${DATA_PATH}/metadata
+        target: /mnt/bones/metadata
+        read_only: true
+
+      - type: bind
+        source: ${DATA_PATH}
+        target: /mnt/bones/files
+        read_only: true
+
+    environment:
+      - PORT=8080

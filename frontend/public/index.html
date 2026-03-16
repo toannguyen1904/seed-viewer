@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+  
+  <title>Viewer Bones</title>
+
+  <link href="./index.css" rel="stylesheet">
+
+
+  <!-- google icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+
+
+  <!-- ffmpeg -->
+  <!-- <script src="https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd"></script> -->
+
+</head>
+
+<!-- overflow-hidden -->
+<body class="m-0 h-screen w-screen overflow-hidden" style="background: var(--theme-page-bg);">
+
+
+  <!-- loading screen. disabled after everything has loaded-->
+   <div id="loading-screen" class="z-50 absolute top-0 left-0 w-full h-full" style="background: var(--theme-page-bg);"></div>
+
+  <!-- loading spinner -->
+   <div id="spinner"></div>
+  
+
+    
+
+  <!-- //////////////////////////////////////////// -->
+
+
+  <!-- Modal overlay -->
+  <div id="nav-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background: var(--theme-modal-backdrop); backdrop-filter: blur(4px);">
+    <div class="relative bg-white rounded-2xl shadow-xl p-8 mx-4" style="width: 80vw; max-width: 1100px; aspect-ratio: 16/9;">
+      <button id="nav-modal-close" class="absolute top-4 right-5 text-gray-400 hover:text-gray-700 transition-colors" style="font-size: 32px; line-height: 1; cursor: pointer;">&times;</button>
+      <p id="nav-modal-text" class="text-gray-600 text-center text-lg mt-8"></p>
+    </div>
+  </div>
+
+  <div id="top-level-container" class="flex flex-row h-full w-full p-2 gap-0">
+
+    <!-- Left nav sidebar -->
+    <div id="nav-sidebar" class="flex flex-col gap-1.5 pr-2 flex-none">
+      <img src="./images/TYPO_COLOR_WHITE_BG_01.jpg" alt="Logo" class="nav-btn" style="padding: 2px; object-fit: contain; cursor: default;">
+      <button data-nav="seed" class="nav-btn nav-btn-active" title="SEED Viewer">SEED</button>
+      <button data-nav="rp1" class="nav-btn" title="RP1">RP1</button>
+      <button data-nav="rp2" class="nav-btn" title="RP2">RP2</button>
+    </div>
+
+    <div id="left-pane" class="w-1/4 flex flex-col">
+
+      <div id="left-pane-up" class="h-1/2 w-full overflow-clip panel-card">
+        <div id="browser"></div>
+      </div>
+
+      <div name="divider-v"></div>
+
+      <div id="left-pane-down" class="h-1/2 w-full overflow-auto panel-card">
+        <div id="metadata-viewer" class="overflow-auto"></div>
+
+      </div>
+
+    </div>
+
+    <div name="divider-h"></div>
+
+    <div id="right-pane" class="w-3/4">
+      
+      <div id="right-pane-up" class="relative h-full w-full overflow-clip panel-card">
+        <canvas id="3d-viewport" class="h-full w-full block" tabIndex="1000"></canvas>
+        <div id="upperbar"  class="absolute top-0 right-0 flex flex-col h-full gap-1 items-end p-4 pr-6">
+          <div id="controls-row" class="flex items-center gap-1.5 pointer-events-auto">
+            <div id="projection-toggle"></div>
+            <div id="settings-toggle"></div>
+          </div>
+          <div id="view-cube" class="pointer-events-auto mt-6 mb-6"></div>
+          <div id="model-selector" class="pointer-events-auto flex flex-col gap-2"></div>
+          <div id="download-anim" class="hidden"></div>
+        </div>
+        <div id="timeline" class="absolute bottom-0 " style="visibility: hidden;"></div>
+      </div>
+
+      <div name="divider-v"></div>
+
+      <div id="right-pane-down" class="h-0 w-full overflow-auto"> 
+      </div> 
+
+    </div>
+  </div>
+
+  <!-- ////////////////////// BUTTON CALLBACKS /////////////////////////// -->
+  
+  <script>
+    /** prevents number input from having length larger than the length of max */
+    function checkLength(e){
+      const maxlength = e.target.max.toString().length;
+
+      const isNumeric = (key) => {
+        return key >= 48 && key <= 57;
+      }
+
+      // if the length of the input is equal to the maxlength of the input and the key pressed is 
+      if(e.target.value.length === maxlength  && isNumeric(e.keyCode)){
+         e.stopPropagation();
+         e.preventDefault();
+         return false;
+      }
+      return true;
+  }
+  </script>
+
+  <!-- ///////////////////////////////////////////////// -->
+
+
+  <script>
+    (function() {
+      var modal = document.getElementById('nav-modal');
+      var modalText = document.getElementById('nav-modal-text');
+      var closeBtn = document.getElementById('nav-modal-close');
+
+      document.querySelectorAll('.nav-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var nav = btn.getAttribute('data-nav');
+          if (nav === 'seed') return; // current page, do nothing
+
+          var label = nav.toUpperCase();
+          modalText.innerHTML = 'Here goes an image presenting <strong>' + label +
+            '</strong> with a <a href="#" class="text-blue-500 underline">link to website</a>.';
+          modal.classList.remove('hidden');
+        });
+      });
+
+      closeBtn.addEventListener('click', function() {
+        modal.classList.add('hidden');
+      });
+
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) modal.classList.add('hidden');
+      });
+    })();
+  </script>
+
+  <script type="module" src="./src/main.ts"></script>
+
+
+
+</body>
+
+</html>

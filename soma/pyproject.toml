@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bones-seed-soma-example"
+version = "0.1.0"
+description = "Example scripts for parsing BONES-SEED data with SOMA"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "torch",
+]
+
+[tool.setuptools]
+py-modules = ["bvh", "parse_data_example_minimal"]
