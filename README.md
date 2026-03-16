@@ -2,9 +2,9 @@
 
 A web application for browsing the BONES-SEED motion capture dataset. Renders skeleton animations on 3D character models in the browser using Three.js, with a searchable file browser, metadata panel, and temporal label overlay.
 
-Supports two character models: **SOMA** (default) and Unitree **G1** robot.
+Supports two character models: [**SOMA**](https://github.com/NVlabs/SOMA-X) and Unitree **G1** robot.
 
-Temporal labels by NVIDIA from the [KIMODO](https://research.nvidia.com/labs/sil/projects/kimodo/) project.
+Temporal labels were created by NVIDIA for the [KIMODO](https://research.nvidia.com/labs/sil/projects/kimodo/) project.
 
 ## Quick Start
 
