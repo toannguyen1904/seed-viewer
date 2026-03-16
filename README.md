@@ -2,9 +2,11 @@
 
 A web application for browsing the BONES-SEED motion capture dataset. Renders skeleton animations on 3D character models in the browser using Three.js, with a searchable file browser, metadata panel, and temporal label overlay.
 
-Supports two character models: [**SOMA**](https://github.com/NVlabs/SOMA-X) and Unitree **G1** robot.
+Supports two character models: 
+* [SOMA body model](https://github.com/NVlabs/SOMA-X) 
+* Unitree G1 robot
 
-Temporal labels were created by NVIDIA for the [KIMODO](https://research.nvidia.com/labs/sil/projects/kimodo/) project.
+Temporal labels were created by NVIDIA for the [Kimodo](https://research.nvidia.com/labs/sil/projects/kimodo/) project.
 
 ## Quick Start
 
@@ -30,11 +32,11 @@ The app will be available at **http://localhost:8666**.
 
 ```
 DATA_PATH/
-  metadata/               # Parquet metadata + .jsonl temporal labels
+  metadata/               # Parquet metadata + jsonl temporal labels
   soma_proportional/bvh/  # Original mocap on SOMA — BVH files
   soma_uniform/bvh/       # Mocap retargeted to unified SOMA shape — BVH files
-  g1/csv/                 # Mocap retargeted to G1 robot — MuJoCo CSV files
-  soma_shapes/			        # SOMA shape parameters
+  g1/csv/                 # Mocap retargeted to G1 robot — MuJoCo compatible CSV files
+  soma_shapes/			      # SOMA shape parameters
 ```
 
 ## Local Development
@@ -73,6 +75,20 @@ npx playwright test --headed   # with visible browser
 ## SOMA Example
 
 The `soma/` directory contains a minimal Python example for parsing BONES-SEED motion capture data and running it through the SOMA body model.
+
+## Related Work
+
+BONES-SEED is part of a larger effort to enable humanoid motion data for robotics, physical AI, and other applications.
+
+Check out these related works:
+
+* [SOMA Body Model](https://github.com/NVlabs/SOMA-X) - Parametric human body model with standardized skeleton, mesh, and shape parameters
+* [SOMA Retargeter]()
+* [GEM-X](https://github.com/NVlabs/GEM-X) - Human motion estimation from video
+* [Kimodo](https://research-staging.nvidia.com/labs/sil/projects/kimodo/) - Kinematic motion diffusion model for text and constraint-driven 3D human and robot motion generation
+* [ProtoMotions](https://github.com/NVlabs/ProtoMotions) - GPU-accelerated simulation and learning framework for training physically simulated digital humans and humanoid robots
+* [SONIC](https://nvlabs.github.io/GEAR-SONIC/) - Whole-body control for humanoid robots, training locomotion and interaction policies
+
 
 ## License
 

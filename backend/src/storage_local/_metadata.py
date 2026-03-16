@@ -10,15 +10,15 @@ router = APIRouter()
 
 
 
-@router.get("/{move_org_name}")
-def get_metadata(move_org_name: str):
+@router.get("/{filename}")
+def get_metadata(filename: str):
     """
-    Get metadata for a move by its original name.
+    Get metadata for a move by its filename.
     """
-    
-    # get row where index is move_org_name
+
+    # get row where index is filename
     try:
-        move =  Global.metadata.loc[move_org_name].to_dict()
+        move =  Global.metadata.loc[filename].to_dict()
     except KeyError:        
         return JSONResponse(
             status_code=404, content={"error": "Move not found."}
@@ -51,8 +51,8 @@ def get_moves(
     moves = moves.iloc[(page-1)*perpage:page*perpage]
     
     # convert to dict with two keys, renamed and reordered
-    df = moves.reset_index()[["move_name", "move_org_name"]]
-    df = df.rename(columns={"move_name": "Move name", "move_org_name": "Filename"})
+    df = moves.reset_index()[["move_name", "filename"]]
+    df = df.rename(columns={"move_name": "Move name", "filename": "Filename"})
     moves = df.to_dict(orient="records")
     
         

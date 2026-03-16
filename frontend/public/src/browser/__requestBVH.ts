@@ -66,9 +66,9 @@ export async function requestBVH({ random = false, val="" }) {
         }
 
         // Fetch temporal labels in background (non-blocking)
-        // For non-random: val is the actual move_org_name from the browser table
-        // For random: use g.MOVE_ORG_NAME set by loadBVHString/loadG1CSVString
-        fetchTemporalLabels(random ? g.MOVE_ORG_NAME : val);
+        // For non-random: val is the actual filename from the browser table
+        // For random: use g.FILENAME set by loadBVHString/loadG1CSVString
+        fetchTemporalLabels(random ? g.FILENAME : val);
 
     } catch (err: any) {
         // Check if the request was aborted

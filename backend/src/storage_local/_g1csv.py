@@ -15,18 +15,18 @@ def g1csv(csvpath: str = None, random: bool = False):
 
     if random:
         move = Global.metadata.sample(n=1)
-        move_org_name = move.index[0]
+        filename = move.index[0]
         move = move.iloc[0].to_dict()
-        move['move_org_name'] = move_org_name
+        move['filename'] = filename
     else:
         if csvpath not in Global.metadata.index:
             return JSONResponse(
                 status_code=404, content={"error": f"move '{csvpath}' not found in metadata."}
             )
         move = Global.metadata.loc[csvpath].to_dict()
-        move['move_org_name'] = csvpath
+        move['filename'] = csvpath
 
-    path = move["move_retarget_g1_mujoco_path"]
+    path = move["move_g1_path"]
     if not path or (isinstance(path, float) and path != path):  # Check for NaN
         return JSONResponse(
             status_code=404, content={"error": f"No G1 CSV path available for this move."}

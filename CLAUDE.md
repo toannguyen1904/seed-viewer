@@ -64,13 +64,13 @@ Vanilla TypeScript + Three.js, no framework. Single HTML entry point: `index.htm
 
 ### Backend (`backend/src/`)
 
-- `globals.py` — loads metadata (.parquet) from `DATA_ROOT/metadata/`, sets up file paths at `DATA_ROOT/files/`, loads temporal labels from JSONL in metadata dir. Renames `filename` column to `move_org_name` and uses it as the DataFrame index. `DATA_ROOT` defaults to `/mnt/bones`.
+- `globals.py` — loads metadata (.parquet) from `DATA_ROOT/metadata/`, sets up file paths at `DATA_ROOT/files/`, loads temporal labels from JSONL in metadata dir. Uses `filename` column as the DataFrame index. `DATA_ROOT` defaults to `/mnt/bones`.
 - `storage_local/` routes:
-  - `GET /api/storage_local/somabvh/?bvhpath=<move_org_name>` — returns SOMA BVH file content (reads `move_mocap_soma_uniform_path`)
-  - `GET /api/storage_local/g1csv/?csvpath=<move_org_name>` — returns G1 CSV file content (reads `move_retarget_g1_mujoco_path`)
-  - `GET /api/storage_local/temporal_labels/?move_org_name=<name>` — returns temporal label events for an animation
+  - `GET /api/storage_local/somabvh/?bvhpath=<filename>` — returns SOMA BVH file content (reads `move_soma_uniform_path`)
+  - `GET /api/storage_local/g1csv/?csvpath=<filename>` — returns G1 CSV file content (reads `move_g1_path`)
+  - `GET /api/storage_local/temporal_labels/?filename=<name>` — returns temporal label events for an animation
   - All animation endpoints support `?random=true` for random selection
-- `metadata/` routes: `GET /api/metadata/<move_org_name>` for single row, `GET /api/metadata/?page=&perpage=&query=` for paginated listing
+- `metadata/` routes: `GET /api/metadata/<filename>` for single row, `GET /api/metadata/?page=&perpage=&query=` for paginated listing
 - Expects Docker volumes: metadata at `/mnt/bones/metadata/` (parquet + temporal labels JSONL), data files at `/mnt/bones/files/` (containing `soma_uniform/bvh/`, `g1/csv/`, etc. — paths are relative as stored in metadata)
 
 ### Data Flow

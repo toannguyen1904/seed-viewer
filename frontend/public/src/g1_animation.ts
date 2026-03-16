@@ -157,7 +157,7 @@ export async function loadG1CSVString(
 
     // Update global animation state
     g.FRAME = 0;
-    g.MOVE_ORG_NAME = name;
+    g.FILENAME = name;
     g.LOOP_START = 0;
     g.LOOP_END = anim.maxFrame;
 

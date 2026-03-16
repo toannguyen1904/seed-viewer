@@ -20,7 +20,7 @@ export function fillTwoColumnMetadata(dict: { [key: string]: string }, preproces
         // });
        
         const second = [
-            "move_org_name",
+            "filename",
             "move_name",
             "content_natural_desc_1",
             "content_natural_desc_2",
@@ -84,9 +84,3 @@ export function initMetadataViewer(){
 //     const span = document.getElementById("metadata-viewer-data")!;
 //     span.innerHTML = data
 // }
-
-
-// <div id="metadata-viewer-currmove" class="p-1 self-center break-all bg-teal-500/20 w-full flex flex-col">
-// <span id="metadata-viewer-currmove-moveorgname">MON: move_org_name.bvh </span>
-// <span id="metadata-viewer-currmove-movename">MN: move_name</span>
-// </div>

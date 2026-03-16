@@ -7,18 +7,18 @@ import pandas as pd
 router = APIRouter()
 
 
-@router.get("/{move_org_name}")
-def get_metadata(move_org_name: str):
+@router.get("/{filename}")
+def get_metadata(filename: str):
     """
-    Get metadata for a move by its original name.
+    Get metadata for a move by its filename.
     """
-    
-    # get row where index is move_org_name
+
+    # get row where index is filename
     try:
-        move:pd.Series =  Global.metadata.loc[move_org_name]
+        move:pd.Series =  Global.metadata.loc[filename]
         # to dict
         move = move.to_dict()
-        move["move_org_name"] = move_org_name
+        move["filename"] = filename
                 
     except KeyError:        
         return JSONResponse(

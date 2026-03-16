@@ -58,9 +58,7 @@ class Global:
         logger.info(f"Loading metadata from: {path}")
         df = pd.read_parquet(path)
 
-        if 'filename' in df.columns:
-            df = df.rename(columns={'filename': 'move_org_name'})
-        df = df.set_index('move_org_name')
+        df = df.set_index('filename')
 
         logger.info(f"Loaded metadata: {len(df)} rows, index='{df.index.name}'")
         return df

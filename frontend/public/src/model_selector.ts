@@ -69,7 +69,7 @@ export function initModelSelector() {
         if (newModelType === g.CURRENT_MODEL) return;
 
         // Save current state before switching
-        const savedAnimName = g.MOVE_ORG_NAME;
+        const savedAnimName = g.FILENAME;
         const savedPlaying = g.PLAYING;
         const savedFollowing = g.CAMCON?.following ?? false;
         const savedSkeletonVisible = g.MODEL3D?.skeletonHelper?.visible ?? false;

@@ -61,7 +61,7 @@ interface Globals {
     BROWSER: any,
     GUI: any,
     BACKEND_URL: string,
-    MOVE_ORG_NAME: string,
+    FILENAME: string,
     DEFAULT_WORKSPACE: number,
     URL_PARAMS: URLSearchParams,
     LOOP_START: number,
@@ -87,7 +87,7 @@ export const g: Globals = window.g = {
     GUI: {} as any,
     BACKEND_URL: "/api", // replace frontend port with backend port
     DEFAULT_WORKSPACE: 3,
-    MOVE_ORG_NAME: "",
+    FILENAME: "",
     STATS: undefined,
     PROMPT: "",
     URL_PARAMS: new URLSearchParams(window.location.search),

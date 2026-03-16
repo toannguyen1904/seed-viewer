@@ -17,7 +17,7 @@ FastAPI application serving animation files and metadata. Source in `backend/src
 - Loads metadata from `{DATA_ROOT}/metadata/` — finds first `.parquet` file in the directory
 - Stores as pandas DataFrame accessible via `Global.metadata`
 - `files_path` — root directory for animation files (default `{DATA_ROOT}/files/`, overridable via `DATA_FILES_ROOT` env var)
-- `temporal_labels_data` — dict mapping `move_org_name` to list of temporal label events, loaded from first `.jsonl` file in the metadata directory. Gracefully handles missing file (empty dict).
+- `temporal_labels_data` — dict mapping `filename` to list of temporal label events, loaded from first `.jsonl` file in the metadata directory. Gracefully handles missing file (empty dict).
 
 ## API Routes
 
@@ -28,29 +28,29 @@ All endpoints are registered in `storage_local/main.py` as sub-routers with pref
 ### SOMA BVH Files
 
 ```
-GET /api/storage_local/somabvh/?bvhpath=<move_org_name>
+GET /api/storage_local/somabvh/?bvhpath=<filename>
 GET /api/storage_local/somabvh/?random=true
 ```
 
-Returns: `{"name": "<move_org_name>", "tree": "<BVH file content>"}`
+Returns: `{"name": "<filename>", "tree": "<BVH file content>"}`
 
 Looks up path in metadata column `move_uniform_soma_bvh_path`. Note: metadata stores `.csv` extension but actual files are `.bvh` — the endpoint auto-corrects the extension before reading. Handles NaN/missing values gracefully.
 
 ### G1 CSV Files
 
 ```
-GET /api/storage_local/g1csv/?csvpath=<move_org_name>
+GET /api/storage_local/g1csv/?csvpath=<filename>
 GET /api/storage_local/g1csv/?random=true
 ```
 
-Returns: `{"name": "<move_org_name>", "csv": "<CSV file content>"}`
+Returns: `{"name": "<filename>", "csv": "<CSV file content>"}`
 
 Looks up path in metadata column `move_uniform_g1_csv_path`. Handles NaN/missing values gracefully.
 
 ### Metadata
 
 ```
-GET /api/metadata/<move_org_name>          # Single animation metadata
+GET /api/metadata/<filename>          # Single animation metadata
 GET /api/metadata/?page=1&perpage=1000&query=<search>  # Paginated listing
 ```
 
@@ -59,10 +59,10 @@ The listing endpoint filters to user-facing columns (via `helpers.py:filter_meta
 ### Temporal Labels
 
 ```
-GET /api/storage_local/temporal_labels/?move_org_name=<name>
+GET /api/storage_local/temporal_labels/?filename=<name>
 ```
 
-Returns: `{"move_org_name": "<name>", "events": [{"start_time": 0.0, "end_time": 1.88, "description": "..."}]}`
+Returns: `{"filename": "<name>", "events": [{"start_time": 0.0, "end_time": 1.88, "description": "..."}]}`
 
 Looks up temporal label events from the JSONL file loaded at startup into `Global.temporal_labels_data`. Returns 404 if no data exists for the given move.
 

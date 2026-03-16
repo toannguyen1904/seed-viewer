@@ -6,16 +6,16 @@ router = APIRouter()
 
 
 @router.get("/")
-def temporal_labels(move_org_name: str = None):
-    """Return temporal label events for a given move_org_name."""
-    if move_org_name is None:
-        return JSONResponse(status_code=400, content={"error": "move_org_name is required."})
+def temporal_labels(filename: str = None):
+    """Return temporal label events for a given filename."""
+    if filename is None:
+        return JSONResponse(status_code=400, content={"error": "filename is required."})
 
     if Global.temporal_labels_data is None:
         return JSONResponse(status_code=404, content={"error": "No temporal labels data loaded."})
 
-    events = Global.temporal_labels_data.get(move_org_name)
+    events = Global.temporal_labels_data.get(filename)
     if events is None:
-        return JSONResponse(status_code=404, content={"error": f"No temporal labels for '{move_org_name}'."})
+        return JSONResponse(status_code=404, content={"error": f"No temporal labels for '{filename}'."})
 
-    return {"move_org_name": move_org_name, "events": events}
+    return {"filename": filename, "events": events}

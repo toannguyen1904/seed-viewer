@@ -177,7 +177,7 @@ export function fetchTemporalLabels(moveOrgName: string) {
 
     if (!moveOrgName) return;
 
-    fetch(`${g.BACKEND_URL}/storage_local/temporal_labels/?move_org_name=${encodeURIComponent(moveOrgName)}`)
+    fetch(`${g.BACKEND_URL}/storage_local/temporal_labels/?filename=${encodeURIComponent(moveOrgName)}`)
         .then(res => {
             if (!res.ok) return null;
             return res.json();

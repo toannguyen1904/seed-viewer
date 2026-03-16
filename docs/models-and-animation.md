@@ -101,7 +101,7 @@ Both helpers are added to `g.SCENE` (not to the model object) to avoid double-sc
 
 ## Model Switching Flow (`model_selector.ts`)
 
-1. Save current state: animation name (`g.MOVE_ORG_NAME`), playing, following, skeleton visibility
+1. Save current state: animation name (`g.FILENAME`), playing, following, skeleton visibility
 2. `disposeModel3D()` — cleans up current model geometry, materials, skeleton helpers
 3. Set `g.CURRENT_MODEL` to new type
 4. Create new model class (`Model3D` or `Model3DG1`)
