@@ -26,7 +26,7 @@ def g1csv(csvpath: str = None, random: bool = False):
         move = Global.metadata.loc[csvpath].to_dict()
         move['filename'] = csvpath
 
-    path = move["move_g1_path"]
+    path = move["move_g1_mujoco_path"]
     if not path or (isinstance(path, float) and path != path):  # Check for NaN
         return JSONResponse(
             status_code=404, content={"error": f"No G1 CSV path available for this move."}
